@@ -19,8 +19,8 @@ class PredictorModel:
             self.X, self.y = oversample.fit_resample(self.X, self.y)
 
             self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X,
-                                                                                self.y,
-                                                                                test_size=0.2)
+                                                                                    self.y,
+                                                                                    test_size=0.2)
             self.model.fit(self.X_train, self.y_train)
 
         # model exists, so load it
