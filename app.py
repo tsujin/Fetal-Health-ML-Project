@@ -1,10 +1,9 @@
-import csv
-
 from flask import Flask
 from flask import render_template
 from flask import request
 import pandas as pd
 from models import rfclassifier
+from os import path
 
 app = Flask(__name__)
 
@@ -16,19 +15,26 @@ def index():
 
 @app.route('/data', methods=['GET', 'POST'])
 def dashboard():
-    return str(rfclassifier.test_model())
+    pass
 
 
 @app.route('/uploader', methods=['GET', 'POST'])
 def predict_csv():
     if request.method == 'POST':
-
-        model_predictor = rfclassifier.PredictorModel()
-        model_predictor.save_model()
         f = request.files['file']
         df = pd.read_csv(f)
         x = df.iloc[0].values[:-1]
-        prediction = model_predictor.predict(x.reshape(1, -1))
+
+        if not path.exists("./models/rfclassifer.joblib"):
+            print("Model not found, creating new one")
+            model_predictor = rfclassifier.PredictorModel()
+            model_predictor.save_model()
+            prediction = model_predictor.predict(x.reshape(1, -1))
+
+        else:
+            print("Loading saved model")
+            model_predictor = rfclassifier.PredictorModel(model='./models/rfclassifer.joblib')
+            prediction = model_predictor.predict(x.reshape(1, -1))
 
         return render_template('predictor.html', data=prediction)
 
