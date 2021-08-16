@@ -5,7 +5,6 @@ from flask import render_template
 from flask import request
 import pandas as pd
 from models import rfclassifier
-import numpy as np
 
 app = Flask(__name__)
 
@@ -23,10 +22,12 @@ def dashboard():
 @app.route('/uploader', methods=['GET', 'POST'])
 def predict_csv():
     if request.method == 'POST':
+
         model_predictor = rfclassifier.PredictorModel()
+        model_predictor.save_model()
         f = request.files['file']
         df = pd.read_csv(f)
-        x = df.iloc[9].values[:-1]
+        x = df.iloc[0].values[:-1]
         prediction = model_predictor.predict(x.reshape(1, -1))
 
         return render_template('predictor.html', data=prediction)
