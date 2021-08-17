@@ -5,11 +5,48 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Fetal Health Predictor</title>
 </head>
+<style>
+    .centered {
+        position: fixed;
+        top: 40%;
+        left: 40%;
+        margin-top: -50px;
+        margin-left: -100px;
+        text-align: center;
+    }
+
+    .data-card {
+        top: 150%;
+        height: 75px;
+        width: 350px;
+        border: 2px solid black;
+        position: absolute;
+        text-align: center;
+    }
+
+    .data-label {
+        position: relative;
+        top: -10px;
+        left: 20px;
+        height: 25px;
+        width: 100px;
+        background-color: pink;
+        border: 2px solid red;
+        text-align: center;
+    }
+
+</style>
 <body>
-    <form action = "http://localhost:5000/uploader" method = "POST" enctype = "multipart/form-data">
-        <input type = "file" name = "file" />
-        <input type = "submit" />
-        {{ data }}
-    </form>
+    <div class="centered">
+        <h3>Upload Fetal Health Data File</h3>
+        <form action = "http://localhost:5000/uploader" method = "POST" enctype = "multipart/form-data">
+            <input type = "file" name = "file" />
+            <input type = "submit" />
+        </form>
+        <div class="data-card">
+            <div class="data-label">Prediction</div>
+            {{ data }}
+        </div>
+    </div>
 </body>
 </html>
