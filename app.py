@@ -13,7 +13,7 @@ def index():
     return 'Hello World!'
 
 
-@app.route('/data', methods=['GET', 'POST'])
+@app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     pass
 
@@ -28,6 +28,7 @@ def predict_csv():
             print("Model not found, creating new one")
             model_predictor = rfclassifier.PredictorModel()
             model_predictor.save_model()
+            # as we are only predicting a single case, the data must be reshaped
             prediction = model_predictor.predict(csv_data.reshape(1, -1))
 
         else:
