@@ -5,6 +5,8 @@ from flask import request
 from models import rfclassifier
 from os import path
 
+import plots
+
 app = Flask(__name__)
 
 
@@ -15,7 +17,11 @@ def index():
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
-    pass
+    plotter = plots.Plotter()
+    target_data = plotter.plot_targets()
+    heatmap = plotter.plot_heatmap()
+
+    return render_template('dashboard.html', target_data=target_data, heatmap=heatmap)
 
 
 @app.route('/uploader', methods=['GET', 'POST'])
