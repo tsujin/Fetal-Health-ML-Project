@@ -26,7 +26,7 @@ class PredictorModel:
         # model exists, so load it
         else:
             from joblib import load
-            self.model = load('./models/rfclassifer.joblib')
+            self.model = load('./models/rfclassifier.joblib')
 
     # used to predict a single case
     def predict(self, data):
@@ -35,4 +35,4 @@ class PredictorModel:
     # save the fitted model
     def save_model(self):
         from joblib import dump
-        dump(self.model, './models/rfclassifer.joblib')
+        dump(self.model, './models/rfclassifier.joblib')
