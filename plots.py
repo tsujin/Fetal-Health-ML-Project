@@ -33,3 +33,22 @@ class Plotter:
         img.seek(0)
         plot_url = base64.b64encode(img.getvalue()).decode('utf8')
         return plot_url
+
+    def correlation_plot(self):
+        over_50 = self.df[self.df["percentage_of_time_with_abnormal_long_term_variability"] > 50.0]
+        sns.scatterplot(data=over_50, x="abnormal_short_term_variability",
+                        y="percentage_of_time_with_abnormal_long_term_variability",
+                        palette="bright",
+                        hue="fetal_health")
+        plt.axhline(over_50["percentage_of_time_with_abnormal_long_term_variability"].mean(), color="red",
+                    linestyle="--")
+        plt.ylabel("% of Time With Long Term Abnormal Variability")
+        plt.xlabel("Abnormal Short Term Variability")
+        plt.title("Fetal Heart Rate (FHR) Variability Chart")
+
+        img = BytesIO()
+        plt.savefig(img, format='png')
+        plt.close()
+        img.seek(0)
+        plot_url = base64.b64encode(img.getvalue()).decode('utf8')
+        return plot_url
