@@ -31,7 +31,7 @@ def predict_csv():
         f = request.files['file']
         csv_data = np.genfromtxt(f, delimiter=',')
 
-        if not path.exists("./models/rfclassifer.joblib"):
+        if not path.exists("./models/rfclassifier.joblib"):
             print("Model not found, creating new one")
             model_predictor = rfclassifier.PredictorModel()
             model_predictor.save_model()
@@ -40,7 +40,7 @@ def predict_csv():
 
         else:
             print("Loading saved model")
-            model_predictor = rfclassifier.PredictorModel(model='./models/rfclassifer.joblib')
+            model_predictor = rfclassifier.PredictorModel(model='./models/rfclassifier.joblib')
             prediction = model_predictor.predict(csv_data.reshape(1, -1))
 
         pred_int = int(prediction)
