@@ -3,3 +3,4 @@ docs/
 .idea/
 __pycache__/
 packages list.txt
+./models/rfclassifier.joblib
