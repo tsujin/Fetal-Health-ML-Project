@@ -22,9 +22,10 @@ def dashboard():
     heatmap = plotter.plot_heatmap()
     corr_plot = plotter.correlation_plot()
     pie_plot = plotter.pie_plot()
+    conf_matrix = plotter.confusion_matrix()
 
     return render_template('dashboard.html', target_data=target_data, heatmap=heatmap, corr_plot=corr_plot,
-                           pie_plot=pie_plot)
+                           pie_plot=pie_plot, conf_matrix=conf_matrix)
 
 
 @app.route('/uploader', methods=['GET', 'POST'])

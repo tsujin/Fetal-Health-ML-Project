@@ -4,7 +4,9 @@ import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
 import seaborn as sns
-
+from models import rfclassifier
+from sklearn.metrics import confusion_matrix
+import numpy as np
 
 class Plotter:
     def __init__(self):
@@ -62,6 +64,21 @@ class Plotter:
         plt.title("Fetal Health Counts")
         plt.xlabel("Fetal Health")
         plt.ylabel("Cases")
+
+        img = BytesIO()
+        plt.savefig(img, format='png')
+        plt.close()
+        img.seek(0)
+        plot_url = base64.b64encode(img.getvalue()).decode('utf8')
+
+        return plot_url
+
+    def confusion_matrix(self):
+        model = rfclassifier.PredictorModel()
+        plt.subplots(figsize=(4, 3))
+        prediction = model.predict(model.X_test)
+        matrix = confusion_matrix(model.y_test, prediction)
+        sns.heatmap(matrix/np.sum(matrix), cmap="coolwarm", annot = True)
 
         img = BytesIO()
         plt.savefig(img, format='png')
