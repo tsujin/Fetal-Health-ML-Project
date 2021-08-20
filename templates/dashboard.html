@@ -8,29 +8,44 @@
             background-color: darkgrey;
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         .dashboard-container {
             box-sizing: content-box;
             border: solid orange 10px;
             padding: 5px;
         }
 
-        .dashboard-container img {
-            display: block;
-            margin: 10px;
+        .column {
+            float: left;
+            width: 25%;
+            padding: 10px;
         }
 
-        .figure-count-box {
-            background: white;
-
+        .column img {
+            margin-top: 12px;
         }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
     </style>
 </head>
 <body>
     <div class="dashboard-container">
-        <div class="image-container">
-            <img src="data:image/png;base64, {{ target_data }}">
-            <img src="data:image/png;base64, {{ pie_plot }}">
-            <img src="data:image/png;base64, {{ corr_plot }}">
+        <div class="row">
+            <div class="column">
+                <img src="data:image/png;base64, {{ pie_plot }}">
+                <img src="data:image/png;base64, {{ target_data }}">
+            </div>
+            <div class="column">
+                <img src="data:image/png;base64, {{ corr_plot }}">
+            </div>
         </div>
     </div>
 </body>
