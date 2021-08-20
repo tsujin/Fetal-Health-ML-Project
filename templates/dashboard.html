@@ -23,6 +23,7 @@
             float: left;
             width: 33%;
             padding: 10px;
+            text-align: center;
         }
 
         .column img {
@@ -41,13 +42,16 @@
     <div class="dashboard-container">
         <div class="row">
             <div class="column">
+                <h2>Value Counts by Risk</h2>
                 <img src="data:image/png;base64, {{ pie_plot }}" style="width:100%">
                 <img src="data:image/png;base64, {{ target_data }}" style="width:100%">
             </div>
             <div class="column">
+                <h2>Correlation Statistics</h2>
                 <img src="data:image/png;base64, {{ corr_plot }}" style="width:100%">
             </div>
             <div class="column">
+                <h2>Model Analysis</h2>
                 <img src="data:image/png; base64, {{ conf_matrix }}" style="width:100%">
             </div>
         </div>

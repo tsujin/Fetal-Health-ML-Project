@@ -75,10 +75,13 @@ class Plotter:
 
     def confusion_matrix(self):
         model = rfclassifier.PredictorModel()
-        plt.subplots(figsize=(4, 3))
+        plt.subplots(figsize=(6, 5))
         prediction = model.predict(model.X_test)
         matrix = confusion_matrix(model.y_test, prediction)
-        sns.heatmap(matrix/np.sum(matrix), cmap="coolwarm", annot = True)
+        sns.heatmap(matrix/np.sum(matrix), cmap="coolwarm", annot=True)
+        plt.title("Model Accuracy")
+        plt.xlabel("Predicted Values")
+        plt.ylabel("Actual Values")
 
         img = BytesIO()
         plt.savefig(img, format='png')
