@@ -5,11 +5,13 @@ from io import BytesIO
 import base64
 import seaborn as sns
 
+
 class Plotter:
     def __init__(self):
         self.df = pd.read_csv('./data/fetal_health.csv')
 
     def plot_targets(self):
+        plt.figure(figsize=(4, 3))
         sns.set_theme(style="darkgrid", palette="coolwarm")
         ax = sns.countplot(x=self.df['fetal_health'])
         ax.set_xticklabels(('Low Risk', 'Medium Risk', 'High Risk'))
@@ -51,4 +53,20 @@ class Plotter:
         plt.close()
         img.seek(0)
         plot_url = base64.b64encode(img.getvalue()).decode('utf8')
+        return plot_url
+
+    def pie_plot(self):
+        plt.figure(figsize=(4, 2))
+        pie_plot = plt.pie(self.df['fetal_health'].value_counts(), labels=["Low Risk", "Medium Risk", "High Risk"],
+                           autopct='%1.f%%')
+        plt.title("Fetal Health Counts")
+        plt.xlabel("Fetal Health")
+        plt.ylabel("Cases")
+
+        img = BytesIO()
+        plt.savefig(img, format='png')
+        plt.close()
+        img.seek(0)
+        plot_url = base64.b64encode(img.getvalue()).decode('utf8')
+
         return plot_url

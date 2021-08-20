@@ -21,8 +21,10 @@ def dashboard():
     target_data = plotter.plot_targets()
     heatmap = plotter.plot_heatmap()
     corr_plot = plotter.correlation_plot()
+    pie_plot = plotter.pie_plot()
 
-    return render_template('dashboard.html', target_data=target_data, heatmap=heatmap, corr_plot=corr_plot)
+    return render_template('dashboard.html', target_data=target_data, heatmap=heatmap, corr_plot=corr_plot,
+                           pie_plot=pie_plot)
 
 
 @app.route('/uploader', methods=['GET', 'POST'])
