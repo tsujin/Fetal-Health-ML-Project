@@ -3,10 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Fetal Health Dashboard</title>
+    <style>
+        body {
+            background-color: darkgrey;
+        }
+
+        .dashboard-container {
+            box-sizing: content-box;
+            border: solid orange 10px;
+            padding: 5px;
+        }
+
+        .dashboard-container img {
+            display: block;
+            margin: 10px;
+        }
+
+        .figure-count-box {
+            background: white;
+
+        }
+    </style>
 </head>
 <body>
-<img src="data:image/png;base64, {{ target_data }}">
-<img src="data:image/png;base64, {{ corr_plot }}">
-<img src="data:image/png;base64, {{ heatmap }}" height="800px" width="800px">
+    <div class="dashboard-container">
+        <div class="image-container">
+            <img src="data:image/png;base64, {{ target_data }}">
+            <img src="data:image/png;base64, {{ pie_plot }}">
+            <img src="data:image/png;base64, {{ corr_plot }}">
+        </div>
+    </div>
 </body>
 </html>
