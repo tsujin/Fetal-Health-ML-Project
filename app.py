@@ -3,7 +3,6 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from models import rfclassifier
-from os import path
 
 import plots
 

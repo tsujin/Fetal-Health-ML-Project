@@ -5,12 +5,15 @@ from io import BytesIO
 import base64
 import seaborn as sns
 from models import rfclassifier
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, plot_roc_curve
+from sklearn.model_selection import ShuffleSplit, learning_curve
 import numpy as np
+
 
 class Plotter:
     def __init__(self):
         self.df = pd.read_csv('./data/fetal_health.csv')
+        self.model = rfclassifier.PredictorModel()
 
     def plot_targets(self):
         plt.figure(figsize=(4, 3))
@@ -74,7 +77,7 @@ class Plotter:
         return plot_url
 
     def confusion_matrix(self):
-        model = rfclassifier.PredictorModel()
+        model = self.model
         plt.subplots(figsize=(6, 5))
         prediction = model.predict(model.X_test)
         matrix = confusion_matrix(model.y_test, prediction)
