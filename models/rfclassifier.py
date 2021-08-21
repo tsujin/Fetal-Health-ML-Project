@@ -2,12 +2,13 @@ from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
 from imblearn.over_sampling import SMOTE
 from sklearn.model_selection import train_test_split
+from os import path
 
 
 class PredictorModel:
-    def __init__(self, model=None):
+    def __init__(self):
         # new model, we should make and train from scratch
-        if model is None:
+        if not path.exists('./models/rfclassifier.joblib'):
             self.data = pd.read_csv("./data/fetal_health.csv")
             self.model = RandomForestClassifier(max_depth=20, random_state=42)
 
@@ -23,6 +24,8 @@ class PredictorModel:
                                                                                     test_size=0.2)
             self.model.fit(self.X_train, self.y_train)
 
+            self.save_model()
+
         # model exists, so load it
         else:
             from joblib import load
@@ -35,4 +38,4 @@ class PredictorModel:
     # save the fitted model
     def save_model(self):
         from joblib import dump
-        dump(self.model, './models/rfclassifier.joblib')
+        dump(self, './models/rfclassifier.joblib')
