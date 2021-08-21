@@ -21,7 +21,7 @@
 
         .column {
             float: left;
-            width: 33%;
+            width: 25%;
             padding: 10px;
             text-align: center;
         }
@@ -46,9 +46,9 @@
                 <img src="data:image/png;base64, {{ pie_plot }}" style="width:100%">
                 <img src="data:image/png;base64, {{ target_data }}" style="width:100%">
             </div>
-            <div class="column">
+            <div class="column" style="width:50%">
                 <h2>Correlation Statistics</h2>
-                <img src="data:image/png;base64, {{ corr_plot }}" style="width:100%">
+                <img src="data:image/png;base64, {{ heatmap }}" style="width:100%">
             </div>
             <div class="column">
                 <h2>Model Analysis</h2>

@@ -61,7 +61,7 @@ class Plotter:
         return plot_url
 
     def pie_plot(self):
-        plt.figure(figsize=(4, 2))
+        plt.figure()
         pie_plot = plt.pie(self.df['fetal_health'].value_counts(), labels=["Low Risk", "Medium Risk", "High Risk"],
                            autopct='%1.f%%')
         plt.title("Fetal Health Counts")
