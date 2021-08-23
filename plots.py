@@ -30,7 +30,9 @@ class Plotter:
     def plot_heatmap(self):
         plt.figure(figsize=(14, 12))
         plt.title("Correlation Map")
-        sns.heatmap(self.df.corr(), annot=True, cmap="coolwarm", linewidth=1)
+        heatmap = sns.heatmap(self.df.corr(), annot=True, cmap="coolwarm", linewidth=1)
+        self.format_heatmap(heatmap)
+        heatmap.figure.tight_layout()
 
         img = BytesIO()
         plt.savefig(img, format='png')
@@ -38,6 +40,22 @@ class Plotter:
         img.seek(0)
         plot_url = base64.b64encode(img.getvalue()).decode('utf8')
         return plot_url
+
+    def format_heatmap(self, heatmap):
+        ax = heatmap
+        new_xlabels = []
+        new_ylabels = []
+        xtick_labels = [x.get_text() for x in ax.get_xticklabels()]
+        ytick_labels = [y.get_text() for y in ax.get_yticklabels()]
+        for x in xtick_labels:
+            new_xlabels.append(x.replace("_", " ").title())
+
+        for y in ytick_labels:
+            new_ylabels.append(y.replace("_", " ").title())
+
+        ax.set_xticklabels(new_xlabels)
+        ax.set_yticklabels(new_ylabels)
+
 
     def correlation_plot(self):
         over_50 = self.df[self.df["percentage_of_time_with_abnormal_long_term_variability"] > 50.0]
