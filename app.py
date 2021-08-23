@@ -21,9 +21,11 @@ def dashboard():
     heatmap = plotter.plot_heatmap()
     pie_plot = plotter.pie_plot()
     conf_matrix = plotter.confusion_matrix()
+    classification_report = plotter.class_report_table()
 
     return render_template('dashboard.html', target_data=target_data, heatmap=heatmap,
-                           pie_plot=pie_plot, conf_matrix=conf_matrix)
+                           pie_plot=pie_plot, conf_matrix=conf_matrix,
+                           classification_table=classification_report.to_html())
 
 
 @app.route('/uploader', methods=['GET', 'POST'])

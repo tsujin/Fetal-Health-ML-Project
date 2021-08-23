@@ -1,12 +1,10 @@
 import pandas as pd
-from flask import render_template
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
 import seaborn as sns
 from models import rfclassifier
-from sklearn.metrics import confusion_matrix, plot_roc_curve
-from sklearn.model_selection import ShuffleSplit, learning_curve
+from sklearn.metrics import confusion_matrix, classification_report
 import numpy as np
 
 
@@ -93,3 +91,14 @@ class Plotter:
         plot_url = base64.b64encode(img.getvalue()).decode('utf8')
 
         return plot_url
+
+    def classification_report(self):
+        pred = self.model.predict(self.model.X_test)
+        class_report = classification_report(self.model.y_test, pred, output_dict=True)
+        df_classification_report = pd.DataFrame(class_report).transpose()
+        df_classification_report = df_classification_report.sort_values(by=['f1-score'], ascending=False)
+        return df_classification_report
+
+    def class_report_table(self):
+        data = self.classification_report()
+        return data

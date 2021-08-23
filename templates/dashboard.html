@@ -20,6 +20,7 @@
         }
 
         .column {
+            box-sizing: border-box;
             float: left;
             width: 25%;
             padding: 10px;
@@ -30,11 +31,32 @@
             margin-top: 12px;
         }
 
+        .column table {
+            width: 100%;
+        }
+
         .row:after {
             content: "";
             display: table;
             clear: both;
         }
+
+        table.dataframe, .dataframe th, .dataframe td {
+            border: none;
+            border-bottom: 1px solid black;
+            border-collapse: collapse;
+            text-align: left;
+            padding: 5px;
+            margin-bottom: 40px;
+            font-size: 0.9em;
+        }
+
+        .dataframe th {
+            background-color: lightblue;
+        }
+
+        .dataframe tr:nth-child(odd) { background-color: lightgrey; }
+        .dataframe tr:nth-child(even) { background-color: white; }
 
     </style>
 </head>
@@ -53,6 +75,8 @@
             <div class="column">
                 <h2>Model Analysis</h2>
                 <img src="data:image/png; base64, {{ conf_matrix }}" style="width:100%">
+                <h2>Other Metrics</h2>
+                {{ classification_table|safe }}
             </div>
         </div>
     </div>
