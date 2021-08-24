@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetal Health Classification</title>
+    <style>
+        a.button{
+            display:inline-block;
+            padding:0.35em 1.2em;
+            border:0.1em solid cornflowerblue;
+            margin:0 0.3em 0.3em 0;
+            border-radius:0.12em;
+            box-sizing: border-box;
+            text-decoration:none;
+            font-family:'Roboto',sans-serif;
+            font-weight:300;
+            color:cornflowerblue;
+            text-align:center;
+            transition: all 0.2s;
+        }
+        a.button:hover{
+            color:#000000;
+            background-color:#FFFFFF;
+        }
+        @media all and (max-width:30em){
+            a.button1{
+            display:block;
+            margin:0.4em auto;
+            }
+        }
+
+        .centered {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+<div class="centered">
+    <a href="/dashboard" class="button">Dashboard</a>
+    <a href="/uploader" class="button">Predictor</a>
+</div>
+</body>
+</html>
